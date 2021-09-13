@@ -1,0 +1,30 @@
+[System]
+Name='controle_sugeno'
+Type='sugeno'
+Version=2.0
+NumInputs=1
+NumOutputs=1
+NumRules=2
+AndMethod='prod'
+OrMethod='probor'
+ImpMethod='prod'
+AggMethod='sum'
+DefuzzMethod='wtaver'
+
+[Input1]
+Name='X'
+Range=[-2 2]
+NumMFs=2
+MF1='mf1':'gaussmf',[2 -3]
+MF2='mf2':'gaussmf',[-2 3]
+
+[Output1]
+Name='Y'
+Range=[0 4]
+NumMFs=2
+MF1='mf1':'linear',[3 0]
+MF2='mf2':'linear',[-3 0]
+
+[Rules]
+1, 2 (1) : 1
+2, 1 (1) : 1
