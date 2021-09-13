@@ -1,0 +1,464 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>solucao1_v1</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-09-12"><meta name="DC.source" content="solucao1_v1.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; }
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+span.typesection { color:#A0522D }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#2">Sistemas Nebulosos - UFMG 2021 - Luiz Gabriel Arag&atilde;o</a></li><li><a href="#3">Operador Complemento de Zadeh</a></li><li><a href="#4">Plot Complemento de Zadeh</a></li><li><a href="#5">Operador Complemento de Sugeno</a></li><li><a href="#6">Operador Complemento de Yader</a></li><li><a href="#7">Operador Uni&atilde;o de Zadeh</a></li><li><a href="#8">Operador Soma Limitada</a></li><li><a href="#9">Operador Soma Dr&aacute;stica</a></li><li><a href="#10">Operador Soma Limitada</a></li><li><a href="#11">Operador Minimo</a></li><li><a href="#12">Operador Produto Algebrico</a></li><li><a href="#13">Operador Produto Limitado</a></li><li><a href="#14">Operador Produto Drastico</a></li><li><a href="#15">Mecanismos de Infer&ecirc;ncia</a></li></ul></div><pre class="codeinput">Sistemas <span class="string">Nebulosos</span> <span class="string">-</span> <span class="string">UFMG</span> <span class="string">2021</span> <span class="string">-</span> <span class="string">Luiz</span> <span class="string">Gabriel</span> <span class="string">Arag&atilde;o</span> <span class="string">2014806480</span>
+Exerc&iacute;cios computacionais - Parte 1
+<span class="comment">% % Sistemas Nebulosos</span>
+<span class="comment">%</span>
+</pre><pre class="codeoutput error">Error using dbstatus
+Error: File: C:\Users\Jo&atilde;o\Desktop\Gabriel\UFMG\sistemas nebulosos\sistemas-nebulosos\parte1-curso\solucao1_v1.m Line: 2 Column: 6
+Invalid text character. Check for unsupported symbol, invisible character, or pasting of non-ASCII characters.
+</pre><h2 id="2">Sistemas Nebulosos - UFMG 2021 - Luiz Gabriel Arag&atilde;o</h2><pre class="language-matlab">Exerc&iacute;cios computacionais - Parte 1
+Sistemas <span class="string">Nebulosos</span>
+</pre><pre class="codeinput">close <span class="string">all</span>
+clc
+
+<span class="comment">%espa&ccedil;o amostral</span>
+t = (0:0.0001:8)';
+</pre><h2 id="3">Operador Complemento de Zadeh</h2><pre class="codeinput">conjNeb = trimf(t,[1,4,7]);
+compZadeh = 1 - conjNeb;
+</pre><h2 id="4">Plot Complemento de Zadeh</h2><pre class="codeinput">plot(conjNeb)
+ylim([-.5 1.5]);
+hold <span class="string">on</span>
+plot(compZadeh)
+hXLabel = xlabel(<span class="string">'valor'</span>);
+hYLabel = ylabel(<span class="string">'grau de pertinencia'</span>);
+hLegend = legend(<span class="string">'conjunto'</span>,<span class="string">'complemento nebuloso'</span>);
+figure
+plot(conjNeb,compZadeh)
+hXLabel = xlabel(<span class="string">'grau de pertinencia'</span>);
+hYLabel = ylabel(<span class="string">'grau de pertinencia complementar'</span>);
+hLegend = legend(<span class="string">'conjunto nebuloso/complemento nebuloso'</span>);
+</pre><h2 id="5">Operador Complemento de Sugeno</h2><p>parametros sugeno</p><pre class="codeinput">su = 30;
+su1 = -0.70;
+su2 = 0.70;
+
+<span class="comment">% operador</span>
+compSugeno2=(1-conjNeb)./(1+su*conjNeb);
+compSugeno3=(1-conjNeb)./(1+su1*conjNeb);
+compSugeno4=(1-conjNeb)./(1+su2*conjNeb);
+
+
+<span class="comment">% Plot complemento sugeno</span>
+plot( <span class="keyword">...</span>
+    t,conjNeb, <span class="keyword">...</span>
+    t,compZadeh, <span class="keyword">...</span>
+    t,compSugeno2, <span class="keyword">...</span>
+    t,compSugeno3, <span class="keyword">...</span>
+    t,compSugeno4)
+hXLabel = xlabel(<span class="string">'valor'</span>);
+hYLabel = ylabel(<span class="string">'grau de pertinencia'</span>);
+hLegend = legend( <span class="keyword">...</span>
+    <span class="string">'conjunto A'</span>, <span class="keyword">...</span>
+    <span class="string">'A complemento zadeh'</span>, <span class="keyword">...</span>
+    <span class="string">'A complemento sugeno1'</span>, <span class="keyword">...</span>
+    <span class="string">'A complemento sugeno2'</span>, <span class="keyword">...</span>
+    <span class="string">'A complemento sugeno3'</span>);
+figure
+</pre><h2 id="6">Operador Complemento de Yader</h2><p>parametros de yader</p><pre class="codeinput">y1 = 3;
+y2 = 9;
+compYader = (1-conjNeb.^y1).^(1/y1);
+compYader2= (1-conjNeb.^y2).^(1/y2);
+
+<span class="comment">% Plot Complemento Yader</span>
+<span class="comment">% Plot complemento sugeno</span>
+plot( <span class="keyword">...</span>
+    t,conjNeb, <span class="keyword">...</span>
+    t,compZadeh, <span class="keyword">...</span>
+    t,compYader, <span class="keyword">...</span>
+    t,compYader2)
+hXLabel = xlabel(<span class="string">'valor'</span>);
+hYLabel = ylabel(<span class="string">'grau de pertinencia'</span>);
+hLegend = legend( <span class="keyword">...</span>
+    <span class="string">'A complemento zadeh'</span>, <span class="keyword">...</span>
+    <span class="string">'A complemento yader'</span>, <span class="keyword">...</span>
+    <span class="string">'A complemento yader2'</span>);
+figure
+plot(<span class="keyword">...</span>
+    conjNeb,compZadeh, <span class="keyword">...</span>
+    conjNeb,compYader, <span class="keyword">...</span>
+    conjNeb,compYader2)
+hXLabel = xlabel(<span class="string">'grau de pertinencia'</span>);
+hYLabel = ylabel(<span class="string">'grau de pertinencia complementar'</span>);
+</pre><h2 id="7">Operador Uni&atilde;o de Zadeh</h2><pre class="codeinput">conjNeb2 = gaussmf(t,[1,2]);
+uZadeh = max(conjNeb,conjNeb2);
+plot(t,conjNeb, <span class="keyword">...</span>
+    t,conjNeb2, <span class="keyword">...</span>
+    t,uZadeh,<span class="string">'.-'</span>);
+hXLabel = xlabel(<span class="string">'valor'</span>);
+hYLabel = ylabel(<span class="string">'grau de pertinencia'</span>);
+hLegend = legend( <span class="keyword">...</span>
+    <span class="string">'Conjunto A'</span>, <span class="keyword">...</span>
+    <span class="string">'Conjunto B'</span>, <span class="keyword">...</span>
+    <span class="string">'A Uni&atilde;o B zadeh'</span>);
+</pre><h2 id="8">Operador Soma Limitada</h2><pre class="codeinput">somaLimitada = min(1,conjNeb+conjNeb2);
+plot(t,conjNeb, <span class="keyword">...</span>
+    t,conjNeb2, <span class="keyword">...</span>
+    t,somaLimitada,<span class="string">'.-'</span>);
+hXLabel = xlabel(<span class="string">'valor'</span>);
+hYLabel = ylabel(<span class="string">'grau de pertinencia'</span>);
+hLegend = legend( <span class="keyword">...</span>
+    <span class="string">'Conjunto A'</span>, <span class="keyword">...</span>
+    <span class="string">'Conjunto B'</span>, <span class="keyword">...</span>
+    <span class="string">'A Soma Limitada B'</span>);
+</pre><h2 id="9">Operador Soma Dr&aacute;stica</h2><pre class="codeinput">sDrastica = zeros(1001)';
+x=(0:0.01:10)';
+a= trimf(x,[1,4,7]);
+b=gaussmf(x,[1,2]);
+
+<span class="keyword">for</span> p = 1: length(x)
+    <span class="keyword">if</span> min(a(p),b(p)) == 0
+        sDrastica(p) = max(a(p),b(p));
+    <span class="keyword">else</span>
+        sDrastica(p) = 1;
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+plot(x,a, <span class="keyword">...</span>
+    x,b, <span class="keyword">...</span>
+    x,sDrastica,<span class="string">'.-'</span>);
+hXLabel = xlabel(<span class="string">'valor'</span>);
+hYLabel = ylabel(<span class="string">'grau de pertinencia'</span>);
+hLegend = legend( <span class="keyword">...</span>
+    <span class="string">'Conjunto A'</span>, <span class="keyword">...</span>
+    <span class="string">'Conjunto B'</span>, <span class="keyword">...</span>
+    <span class="string">'A Soma Dr&aacute;stica B'</span>);
+</pre><h2 id="10">Operador Soma Limitada</h2><pre class="codeinput">prodDrast = conjNeb + conjNeb2 -(conjNeb.*conjNeb2);
+plot(t,conjNeb, <span class="keyword">...</span>
+    t,conjNeb2, <span class="keyword">...</span>
+    t,prodDrast,<span class="string">'.-'</span>);
+hXLabel = xlabel(<span class="string">'valor'</span>);
+hYLabel = ylabel(<span class="string">'grau de pertinencia'</span>);
+hLegend = legend( <span class="keyword">...</span>
+    <span class="string">'Conjunto A'</span>, <span class="keyword">...</span>
+    <span class="string">'Conjunto B'</span>, <span class="keyword">...</span>
+    <span class="string">'A Soma Probabilistica B'</span>);
+</pre><h2 id="11">Operador Minimo</h2><pre class="codeinput">prodDrast = min(conjNeb,conjNeb2);
+plot(t,conjNeb, <span class="keyword">...</span>
+    t,conjNeb2, <span class="keyword">...</span>
+    t,prodDrast,<span class="string">'.-'</span>);
+hXLabel = xlabel(<span class="string">'valor'</span>);
+hYLabel = ylabel(<span class="string">'grau de pertinencia'</span>);
+hLegend = legend( <span class="keyword">...</span>
+    <span class="string">'Conjunto A'</span>, <span class="keyword">...</span>
+    <span class="string">'Conjunto B'</span>, <span class="keyword">...</span>
+    <span class="string">'A Minimo B'</span>);
+</pre><h2 id="12">Operador Produto Algebrico</h2><pre class="codeinput">prodDrast = conjNeb.*conjNeb2;
+plot(t,conjNeb, <span class="keyword">...</span>
+    t,conjNeb2, <span class="keyword">...</span>
+    t,prodDrast,<span class="string">'.-'</span>);
+hXLabel = xlabel(<span class="string">'valor'</span>);
+hYLabel = ylabel(<span class="string">'grau de pertinencia'</span>);
+hLegend = legend( <span class="keyword">...</span>
+    <span class="string">'Conjunto A'</span>, <span class="keyword">...</span>
+    <span class="string">'Conjunto B'</span>, <span class="keyword">...</span>
+    <span class="string">'A prod. alg&eacute;brico B'</span>);
+</pre><h2 id="13">Operador Produto Limitado</h2><pre class="codeinput">prodDrast = max(0, conjNeb + conjNeb2 - 1);
+plot(t,conjNeb, <span class="keyword">...</span>
+    t,conjNeb2, <span class="keyword">...</span>
+    t,prodDrast,<span class="string">'.-'</span>);
+hXLabel = xlabel(<span class="string">'valor'</span>);
+hYLabel = ylabel(<span class="string">'grau de pertinencia'</span>);
+hLegend = legend( <span class="keyword">...</span>
+    <span class="string">'Conjunto A'</span>, <span class="keyword">...</span>
+    <span class="string">'Conjunto B'</span>, <span class="keyword">...</span>
+    <span class="string">'A prod. limitado B'</span>);
+</pre><h2 id="14">Operador Produto Drastico</h2><pre class="codeinput">prodDrast = max(0, conjNeb + conjNeb2 - 1);
+<span class="keyword">for</span> p = 1: length(x)
+    <span class="keyword">if</span> b(p) == 1
+        prodDrast(p) = a(p);
+    <span class="keyword">elseif</span> a(p) == 1
+        prodDrast(p) = b(p);
+    <span class="keyword">else</span>
+        prodDrast(p) = 0;
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+plot(t,conjNeb, <span class="keyword">...</span>
+    t,conjNeb2, <span class="keyword">...</span>
+    t,prodDrast,<span class="string">'.-'</span>);
+hXLabel = xlabel(<span class="string">'valor'</span>);
+hYLabel = ylabel(<span class="string">'grau de pertinencia'</span>);
+hLegend = legend( <span class="keyword">...</span>
+    <span class="string">'Conjunto A'</span>, <span class="keyword">...</span>
+    <span class="string">'Conjunto B'</span>, <span class="keyword">...</span>
+    <span class="string">'A prod. dr&aacute;stico B'</span>);
+</pre><h2 id="15">Mecanismos de Infer&ecirc;ncia</h2><p>Aproximacao da funcao: y = x^2 utilizando mecanismos de infer&ecirc;ncia de Mamdami e Sugeno</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2020a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+Sistemas Nebulosos - UFMG 2021 - Luiz Gabriel Aragão 2014806480
+Exercícios computacionais - Parte 1
+% % Sistemas Nebulosos 
+% 
+%%  Sistemas Nebulosos - UFMG 2021 - Luiz Gabriel Aragão 
+%   Exercícios computacionais - Parte 1
+%   Sistemas Nebulosos 
+
+close all
+clc
+
+%espaço amostral
+t = (0:0.0001:8)'; 
+
+%% Operador Complemento de Zadeh 
+conjNeb = trimf(t,[1,4,7]);
+compZadeh = 1 - conjNeb;
+
+%% Plot Complemento de Zadeh 
+plot(conjNeb) 
+ylim([-.5 1.5]);
+hold on
+plot(compZadeh)
+hXLabel = xlabel('valor');
+hYLabel = ylabel('grau de pertinencia');
+hLegend = legend('conjunto','complemento nebuloso');
+figure
+plot(conjNeb,compZadeh)
+hXLabel = xlabel('grau de pertinencia');
+hYLabel = ylabel('grau de pertinencia complementar');
+hLegend = legend('conjunto nebuloso/complemento nebuloso');
+
+%% Operador Complemento de Sugeno
+% parametros sugeno
+su = 30;
+su1 = -0.70;
+su2 = 0.70;
+
+% operador
+compSugeno2=(1-conjNeb)./(1+su*conjNeb);
+compSugeno3=(1-conjNeb)./(1+su1*conjNeb);
+compSugeno4=(1-conjNeb)./(1+su2*conjNeb);
+
+
+% Plot complemento sugeno
+plot( ...
+    t,conjNeb, ...
+    t,compZadeh, ...
+    t,compSugeno2, ...
+    t,compSugeno3, ...
+    t,compSugeno4)
+hXLabel = xlabel('valor');
+hYLabel = ylabel('grau de pertinencia');
+hLegend = legend( ...
+    'conjunto A', ...
+    'A complemento zadeh', ...
+    'A complemento sugeno1', ...
+    'A complemento sugeno2', ...
+    'A complemento sugeno3');
+figure
+
+%% Operador Complemento de Yader
+% parametros de yader
+y1 = 3;
+y2 = 9;
+compYader = (1-conjNeb.^y1).^(1/y1);
+compYader2= (1-conjNeb.^y2).^(1/y2);
+
+% Plot Complemento Yader
+% Plot complemento sugeno
+plot( ...
+    t,conjNeb, ...
+    t,compZadeh, ...
+    t,compYader, ...
+    t,compYader2)
+hXLabel = xlabel('valor');
+hYLabel = ylabel('grau de pertinencia');
+hLegend = legend( ...
+    'A complemento zadeh', ...
+    'A complemento yader', ...
+    'A complemento yader2');
+figure
+plot(...
+    conjNeb,compZadeh, ...
+    conjNeb,compYader, ...
+    conjNeb,compYader2)
+hXLabel = xlabel('grau de pertinencia');
+hYLabel = ylabel('grau de pertinencia complementar');
+
+%% Operador União de Zadeh
+conjNeb2 = gaussmf(t,[1,2]);
+uZadeh = max(conjNeb,conjNeb2);
+plot(t,conjNeb, ...
+    t,conjNeb2, ...
+    t,uZadeh,'.-');
+hXLabel = xlabel('valor');
+hYLabel = ylabel('grau de pertinencia');
+hLegend = legend( ...
+    'Conjunto A', ...
+    'Conjunto B', ...
+    'A União B zadeh');
+
+%% Operador Soma Limitada
+somaLimitada = min(1,conjNeb+conjNeb2);
+plot(t,conjNeb, ...
+    t,conjNeb2, ...
+    t,somaLimitada,'.-');
+hXLabel = xlabel('valor');
+hYLabel = ylabel('grau de pertinencia');
+hLegend = legend( ...
+    'Conjunto A', ...
+    'Conjunto B', ...
+    'A Soma Limitada B');
+
+%% Operador Soma Drástica
+sDrastica = zeros(1001)';
+x=(0:0.01:10)';
+a= trimf(x,[1,4,7]);
+b=gaussmf(x,[1,2]);
+
+for p = 1: length(x)
+    if min(a(p),b(p)) == 0
+        sDrastica(p) = max(a(p),b(p));
+    else
+        sDrastica(p) = 1;
+    end
+end
+plot(x,a, ...
+    x,b, ...
+    x,sDrastica,'.-');
+hXLabel = xlabel('valor');
+hYLabel = ylabel('grau de pertinencia');
+hLegend = legend( ...
+    'Conjunto A', ...
+    'Conjunto B', ...
+    'A Soma Drástica B');
+
+%% Operador Soma Limitada
+prodDrast = conjNeb + conjNeb2 -(conjNeb.*conjNeb2);
+plot(t,conjNeb, ...
+    t,conjNeb2, ...
+    t,prodDrast,'.-');
+hXLabel = xlabel('valor');
+hYLabel = ylabel('grau de pertinencia');
+hLegend = legend( ...
+    'Conjunto A', ...
+    'Conjunto B', ...
+    'A Soma Probabilistica B');
+
+%% Operador Minimo
+prodDrast = min(conjNeb,conjNeb2);
+plot(t,conjNeb, ...
+    t,conjNeb2, ...
+    t,prodDrast,'.-');
+hXLabel = xlabel('valor');
+hYLabel = ylabel('grau de pertinencia');
+hLegend = legend( ...
+    'Conjunto A', ...
+    'Conjunto B', ...
+    'A Minimo B');
+
+%% Operador Produto Algebrico
+prodDrast = conjNeb.*conjNeb2;
+plot(t,conjNeb, ...
+    t,conjNeb2, ...
+    t,prodDrast,'.-');
+hXLabel = xlabel('valor');
+hYLabel = ylabel('grau de pertinencia');
+hLegend = legend( ...
+    'Conjunto A', ...
+    'Conjunto B', ...
+    'A prod. algébrico B');
+
+%% Operador Produto Limitado
+prodDrast = max(0, conjNeb + conjNeb2 - 1);
+plot(t,conjNeb, ...
+    t,conjNeb2, ...
+    t,prodDrast,'.-');
+hXLabel = xlabel('valor');
+hYLabel = ylabel('grau de pertinencia');
+hLegend = legend( ...
+    'Conjunto A', ...
+    'Conjunto B', ...
+    'A prod. limitado B');
+
+%% Operador Produto Drastico
+prodDrast = max(0, conjNeb + conjNeb2 - 1);
+for p = 1: length(x)
+    if b(p) == 1
+        prodDrast(p) = a(p);
+    elseif a(p) == 1
+        prodDrast(p) = b(p);
+    else
+        prodDrast(p) = 0;
+    end
+end
+plot(t,conjNeb, ...
+    t,conjNeb2, ...
+    t,prodDrast,'.-');
+hXLabel = xlabel('valor');
+hYLabel = ylabel('grau de pertinencia');
+hLegend = legend( ...
+    'Conjunto A', ...
+    'Conjunto B', ...
+    'A prod. drástico B');
+
+%% Mecanismos de Inferência
+% Aproximacao da funcao: y = x^2 utilizando mecanismos de inferência de Mamdami e Sugeno
+
+
+
+##### SOURCE END #####
+--></body></html>
