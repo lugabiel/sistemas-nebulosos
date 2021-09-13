@@ -1,0 +1,40 @@
+[System]
+Name='classificador'
+Type='mamdani'
+Version=2.0
+NumInputs=2
+NumOutputs=1
+NumRules=0
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='X'
+Range=[-2 2]
+NumMFs=3
+MF1='x1':'gaussmf',[0.2 -1]
+MF2='x2':'gaussmf',[0.2 0]
+MF3='x3':'gaussmf',[0.2 1]
+
+[Input2]
+Name='Y'
+Range=[-2 2]
+NumMFs=3
+MF1='y1':'gaussmf',[0.2 -1]
+MF2='y2':'gaussmf',[0.2 0]
+MF3='y3':'gaussmf',[0.2 1]
+
+[Output1]
+Name='SAIDA'
+Range=[0 6]
+NumMFs=5
+MF1='C1':'gaussmf',[0.2 1]
+MF2='C2':'gaussmf',[0.2 2]
+MF3='C3':'gaussmf',[0.2 3]
+MF4='C4':'gaussmf',[0.2 4]
+MF5='C5':'gaussmf',[0.2 5]
+
+[Rules]

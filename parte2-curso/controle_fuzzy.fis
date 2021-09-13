@@ -1,0 +1,31 @@
+
+[System]
+Name='control_fuzzy'
+Type='mamdani'
+Version=2.0
+NumInputs=1
+NumOutputs=1
+NumRules=2
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='erro'
+Range=[-1 1]
+NumMFs=2
+MF1='mf1':'trimf',[-2 -1 1]
+MF2='mf3':'trimf',[-1 1 2]
+
+[Output1]
+Name='acao'
+Range=[-1 1]
+NumMFs=2
+MF1='mf1':'trimf',[-2 -1 1]
+MF2='mf3':'trimf',[-1 1 2]
+
+[Rules]
+1, 2 (1) : 1
+2, 1 (1) : 1
